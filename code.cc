@@ -26,9 +26,9 @@ int main(){
 	
 	double S[m];
 	S[m-1] = sin( acos( delta_w_e[m-2] / (2. * delta_s_n) ) ) * 
-		    	(delta_w_e[m-2]) * delta_s_n / 2.;
+		    	delta_w_e[m-2] * delta_s_n / 2.;
 	S[0] = sin( acos( delta_w_e[0] / (2. * delta_s_n) ) ) *
-			(delta_w_e[0]) * delta_s_n / 2.;
+			delta_w_e[0] * delta_s_n / 2.;
 	for(int j = 1; j < m-1; j++){
 		S[j] = (delta_w_e[j-1] + delta_w_e[j]) * delta_s_n /2.;
 	}	
@@ -40,6 +40,7 @@ int main(){
 	int t = 0;
 	while( t++ < time_steps ){
 
+///////////////////////////////////////////////////////////////////////////..
 	// update Ez
 	
 	for( int i = 1; i < 2*m; i++ ){
@@ -75,7 +76,13 @@ int main(){
 	
 	// update Hx
 	
-
+	for( int i = 1; i < 2*m; i++ ){
+		for( int j = 0; j < m-1; j++){
+			Hx[i][j] = Hx[i][j] + (dt/(mi0*delta_w_e[j])) *
+					( Ez[i,j] - Ez[i][j+1] )
+		}
+	}	
+///////////////////////////////////////////////////////////////////////////..
 	}
 	
 	// save results

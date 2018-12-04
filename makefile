@@ -8,7 +8,7 @@
 #BOOST_INC = /usr/include
 #BOOST_LIB = /usr/lib
 
-CODE = main.cc grid.cc cell.cc
+CODE = main.cc spherical_grid.cc 
 TARGET = play
  
 $(TARGET): $(CODE)
